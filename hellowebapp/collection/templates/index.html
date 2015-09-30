@@ -1,12 +1,8 @@
-{% load staticfiles %}
-<!doctype html>
-<html>
-<head>
-	<title>My Hello Web App Project</title>
-	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
-</head>
-<body>
-<h1>Hello World!</h1>
-<p>I am a basic website, payaso.</p>
-</body>
-</html>
+{% extends 'layouts/base.html' %}
+{% block title %}Homepage - {{ block.super}}{% endblock %}
+{% block content %}
+<h1>The Birds Sing a Pretty Song!</h1>
+<p>I am the best website in the world, payaso.</p>
+<p>Your Lucky Number: <b>{{ number }}</b></p>
+<p>Your Slug: <b>{{ thing|slugify }}</b></p>
+{% endblock %}
