@@ -3,5 +3,5 @@
 {% block content %}
 <h1>{{ swimface.name }}</h1>
 <p>{{ swimface.description }}</p>
-
+<a href="{% url 'edit_swimface' slug=swimface.slug %}">Edit {{swimface.name}}!</a>
 {% endblock %}

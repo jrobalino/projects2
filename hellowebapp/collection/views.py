@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from collection.forms import SwimFaceForm
 from collection.models import SwimFace
 
 # Create your views here.
@@ -11,3 +12,16 @@ def index(request):
 def swimface_detail(request, slug):
 	swimface = SwimFace.objects.get(slug=slug)
 	return render(request, 'swimfaces/swimface_detail.html', { 'swimface': swimface,})
+
+def edit_swimface(request, slug):
+	swimface = SwimFace.objects.get(slug=slug)
+	form_class=SwimFaceForm
+	if request.method == 'POST':
+		form = form_class(data=request.POST, instance=swimface)
+		if form.is_valid():
+			form.save()
+			return redirect('swimface_detail', slug=swimface.slug)
+	else:
+		form = form_class(instance=swimface)
+
+	return render(request, 'swimfaces/edit_swimface.html', {'swimface': swimface, 'form': form, })
