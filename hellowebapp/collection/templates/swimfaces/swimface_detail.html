@@ -1,0 +1,7 @@
+{% extends 'layouts/base.html' %}
+{% block title %}{{swimface.name}} - {{ block.super}}{% endblock %}
+{% block content %}
+<h1>{{ swimface.name }}</h1>
+<p>{{ swimface.description }}</p>
+
+{% endblock %}

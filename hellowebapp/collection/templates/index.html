@@ -4,5 +4,17 @@
 <h1>The Birds Sing a Pretty Song!</h1>
 <p>I am the best website in the world, payaso.</p>
 <p>Your Lucky Number: <b>{{ number }}</b></p>
-<p>Your Slug: <b>{{ thing|slugify }}</b></p>
+
+{% for thing in swimfaces %}
+<h2><a href="{% url 'swimface_detail' slug=thing.slug %}">{{ thing.name }}</a></h2>
+<p>{{ thing.description }}</p>
+<p>Your Slug: <b>{{ thing.description|slugify }}</b></p>
+{% endfor %}
+
+{% for thing in swimfacesFiltered %}
+<h2>Filtering Descriptions for Egyptians...</h2>
+<h3>{{ thing.name }}</h3>
+<p>{{ thing.description }}</p>
+<p>Your Slug: <b>{{ thing.description|slugify }}</b></p>
+{% endfor %}
 {% endblock %}
