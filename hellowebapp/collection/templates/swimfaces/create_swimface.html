@@ -1,0 +1,10 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Create a Swimface - {{ block.super}}{% endblock %}
+{% block content %}
+<h1>Create a Swimface</h1>
+<form role="form" action="" method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Submit</button>
+</form>
+{% endblock %}

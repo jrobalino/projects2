@@ -13,6 +13,7 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
@@ -22,6 +23,8 @@ from django.contrib.auth.views import (
     password_reset_confirm,
     password_reset_complete,
 )
+from collection.backends import MyRegistrationView
+
 
 urlpatterns = [
     url(r'^$', 'collection.views.index', name='home'),
@@ -45,6 +48,10 @@ urlpatterns = [
     url(r'^accounts/password/done/$', password_reset_complete,
         {'template_name': 'registration/password_reset_complete.html'},
         name='password_reset_complete'),
+    url(r'^accounts/register/$', MyRegistrationView.as_view(),
+        name='registration_register'),
+    url(r'^accounts/create_swimface/$', 'collection.views.create_swimface',
+        name="registration_create_swimface"),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
