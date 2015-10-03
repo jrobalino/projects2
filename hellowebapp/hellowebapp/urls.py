@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from django.contrib.auth.views import (
     password_reset,
     password_reset_done,
@@ -32,10 +32,21 @@ urlpatterns = [
         name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'),
         name='contact'),
+    
+    url(r'^swimfaces/$', RedirectView.as_view(
+        pattern_name='browse')),
     url(r'^swimfaces/(?P<slug>[-\w]+)/$', 'collection.views.swimface_detail',
         name='swimface_detail'),
     url(r'^swimfaces/(?P<slug>[-\w]+)/edit/$', 'collection.views.edit_swimface',
         name='edit_swimface'),
+
+    url(r'^browse/$', RedirectView.as_view(
+        pattern_name='browse')),
+    url(r'^browse/name/$', 'collection.views.browse_by_name',
+        name='browse'),
+    url(r'^browse/name/(?P<initial>[-\w]+)/$', 'collection.views.browse_by_name',
+        name='browse_by_name'),
+
     url(r'^accounts/password/reset/$', password_reset,
         {'template_name': 'registration/password_reset_form.html'},
         name='password_reset'),
@@ -48,6 +59,7 @@ urlpatterns = [
     url(r'^accounts/password/done/$', password_reset_complete,
         {'template_name': 'registration/password_reset_complete.html'},
         name='password_reset_complete'),
+
     url(r'^accounts/register/$', MyRegistrationView.as_view(),
         name='registration_register'),
     url(r'^accounts/create_swimface/$', 'collection.views.create_swimface',

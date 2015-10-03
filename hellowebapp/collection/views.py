@@ -48,3 +48,15 @@ def create_swimface(request):
 	return render(request, 'swimfaces/create_swimface.html', {
 		'form': form,
 	})
+
+def browse_by_name(request, initial=None):
+	if initial:
+		swimfaces = SwimFace.objects.filter(name__istartswith=initial).order_by('name')
+
+	else:
+		swimfaces = SwimFace.objects.all().order_by('name')
+
+	return render(request, 'search/search.html', {
+		'swimfaces': swimfaces,
+		'initial': initial,
+	})
