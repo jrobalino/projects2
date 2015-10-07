@@ -25,6 +25,7 @@ SECRET_KEY = 'wn7*#h5a=$yq@g%%241d_ixidjq!bl0zidn(-0)2z!2@$*+^$^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Update this before laucnh to match your domain
 ALLOWED_HOSTS = []
 
 
